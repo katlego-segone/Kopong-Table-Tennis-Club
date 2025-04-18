@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopong Table Tennis Club</title>
+    <style>
+        :root {
+            --primary-dark: #0a2463;
+            --primary-light: #3e92cc;
+            --accent: #f8333c;
+            --light: #f5f5f5;
+            --dark: #121212;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 1rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-light);
+        }
+        
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(10, 36, 99, 0.8), rgba(10, 36, 99, 0.9)), url('/api/placeholder/1200/500') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #e02c34;
+        }
+        
+        section {
+            padding: 5rem 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-dark);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+        
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .coaches {
+            background-color: #f9f9f9;
+        }
+        
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .coach-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .coach-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .coach-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .coach-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .coach-info {
+            padding: 1.5rem;
+        }
+        
+        .coach-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .programs {
+            background-color: var(--primary-dark);
+            color: white;
+        }
+        
+        .programs .section-title {
+            color: white;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .program-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .program-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .program-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .join-us {
+            text-align: center;
+        }
+        
+        .join-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .step-card {
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background-color: var(--primary-dark);
+            color: white;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .copyright {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="30" fill="#3E92CC" />
+                    <rect x="15" y="20" width="34" height="2" fill="white" />
+                    <rect x="31" y="15" width="2" height="34" fill="white" />
+                    <circle cx="32" cy="32" r="5" fill="white" />
+                </svg>
+                <h1>Kopong Table Tennis Club</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#coaches">Coaches</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#join">Join Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Kopong Table Tennis Club</h2>
+            <p>Developing future champions through quality coaching and grassroots development. Affiliated with the Botswana Table Tennis Association.</p>
+            <a href="#join" class="btn">Join Our Club</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Our Club</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Kopong Table Tennis Club is a vibrant community sports club dedicated to promoting table tennis in Kopong and surrounding areas. As an affiliated member of the Botswana Table Tennis Association, we provide professional training and competitive opportunities for players of all ages.</p>
+                    <p>Our primary focus is grassroots development, working closely with local primary schools to identify and nurture young talent. We believe in the power of sport to transform lives and build character in young people.</p>
+                    <p>Through our dedicated coaching program, we aim to develop not just skilled players, but confident and disciplined individuals who value teamwork, respect, and determination.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/550/400" alt="Young players practicing table tennis">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coaches" class="coaches">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Coaches</h2>
+            </div>
+            <div class="coaches-grid">
+                <div class="coach-card">
+                    <div class="coach-image">
+                        <img src="/api/placeholder/400/400" alt="Coach Katlego Segone">
+                    </div>
+                    <div class="coach-info">
+                        <h3>Katlego Segone</h3>
+                        <p>Head Coach</p>
+                        <p>Coach Katlego brings years of competitive experience to the club. His passion for developing young talent has helped many players reach their full potential.</p>
+                    </div>
+                </div>
+                <div class="coach-card">
+                    <div class="coach-image">
+                        <img src="/api/placeholder/400/400" alt="Coach Victor Mmotlaanyane">
+                    </div>
+                    <div class="coach-info">
+                        <h3>Victor Mmotlaanyane</h3>
+                        <p>Assistant Coach</p>
+                        <p>Coach Victor specializes in technical skills development. His patient teaching approach makes him particularly effective with younger players just starting their table tennis journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs" class="programs">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Programs</h2>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">🏓</div>
+                    <h3>Grassroots Program</h3>
+                    <p>Introducing young children aged 7-12 to the basics of table tennis in a fun and engaging environment. Perfect for beginners!</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🏆</div>
+                    <h3>Junior Development</h3>
+                    <p>For players aged 13-17 looking to improve their skills and potentially compete at regional and national levels.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family Sessions</h3>
+                    <p>Weekend sessions where families can play together, fostering a supportive community around the sport.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="join" class="join-us">
+        <div class="container">
+            <div class="section-title">
+                <h2>Join Our Club</h2>
+            </div>
+            <div class="join-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Visit Us</h3>
+                    <p>Come to one of our open sessions to see our facilities and meet our coaches and members.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Trial Session</h3>
+                    <p>Participate in a free trial session to experience our training program firsthand.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Register</h3>
+                    <p>Complete the registration form and join our growing table tennis family!</p>
+                </div>
+            </div>
+            <a href="#contact" class="btn">Contact Us To Get Started</a>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Get In Touch</h3>
+                    <p>Interested in joining or have questions? Reach out to us through any of these channels:</p>
+                    <p><strong>Phone:</strong> +267 XXXX XXXX</p>
+                    <p><strong>Email:</strong> info@kopongttc.co.bw</p>
+                    <p><strong>Address:</strong> Community Center, Kopong Village, Botswana</p>
+                    <p>Training sessions are held every Tuesday, Thursday, and Saturday. Young players' sessions start at 3:30 PM on weekdays and 9:00 AM on Saturdays.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/550/400" alt="Kopong Table Tennis Club facilities">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Kopong Table Tennis Club</h3>
+                <p>Affiliated member of the Botswana Table Tennis Association</p>
+                <div class="social-links">
+                    <a href="#">FB</a>
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#coaches">Our Coaches</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#join">Join Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Training Times</h3>
+                <ul>
+                    <li>Tuesdays: 3:30PM - 6:30PM</li>
+                    <li>Thursdays: 3:30PM - 6:30PM</li>
+                    <li>Saturdays: 9:00AM - 12:00PM</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Partners</h3>
+                <ul>
+                    <li><a href="#">Botswana Table Tennis Association</a></li>
+                    <li><a href="#">Kopong Primary School</a></li>
+                    <li><a href="#">Botswana Sports Council</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Kopong Table Tennis Club. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
